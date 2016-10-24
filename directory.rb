@@ -40,23 +40,33 @@ end
   
 
 def print(students)
-students.each_with_index do 
-|student, index| puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+students.each do 
+|student| puts "{#{student[:name]} (#{student[:cohort]} cohort)"
 end
 end
 
-def print_letter(students)    
-  students.each_with_index do 
-  |student, index| 
-if 
-  puts student.length.to_i > 12 
-then next
-else
-puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+def print_while(students)
 
+student = 0
+while student < students.count
+puts "{#{student[:name]} (#{student[:cohort]} cohort)"
+student += 1
 end
-  end
-  end
+end
+
+
+#def print_letter(students)    
+#  students.each_with_index do 
+#  |student, index| 
+#if 
+#  puts student.length.to_i > 12 
+#then next
+#else
+#puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+
+#end
+#  end
+#  end
   
 
 
@@ -68,5 +78,5 @@ end
 
 students = input_students
 print_header
-print_letter(students)
+print_while(students)
 print_footer(students)
