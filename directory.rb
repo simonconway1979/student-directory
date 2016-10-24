@@ -48,10 +48,12 @@ end
 def print_letter(students)    
   students.each_with_index do 
   |student, index| 
-if "#{student[:name]}"[/\AD/] != ""
-puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+if 
+  puts student.length.to_i > 12 
+then next
 else
-next
+puts "#{index + 1} #{student[:name]} (#{student[:cohort]} cohort)"
+
 end
   end
   end
