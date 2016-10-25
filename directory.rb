@@ -49,7 +49,8 @@ def print_while(students)
 
 student = 0
 while student < students.count
-puts "{#{student[:name]} (#{student[:cohort]} cohort)"
+  do
+    |student| puts "{#{student[:name]} (#{student[:cohort]} cohort)"
 student += 1
 end
 end
