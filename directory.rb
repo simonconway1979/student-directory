@@ -7,19 +7,32 @@
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
     @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
+
+def try_load_students
+  filename = ARGV.first #first argument from teh command line
+  return if filename.nil? #get out of the method if no filename is given
+  if File.exists?(filename) #If the file exists
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else #If the file does not exist
+    puts "Sorry, #{filename} does not exist"
+    exit #Quits the program
+  end
+end
+
 
   def print_menu
     # 1. print the menu and ask the user what to do
@@ -31,7 +44,7 @@ end
   end
     
     # 2. read the input and save it into a variable
-    selection = gets.chomp
+    selection = STDIN.gets.chomp
 
     def print_header
     puts "The students of Villains Academy"
@@ -72,11 +85,11 @@ end
     def input_students
       puts "Please enter the names of the students"
       puts "To finish, just hit return twice"
-      name = gets.chomp
+      name = STDIN.gets.chomp
       while !name.empty? do
         @students << {name: name, cohort: :November}
         puts "Now we have #{@students.count} students"
-        name = gets.chomp
+        name = STDIN.gets.chomp
       end
     end
     
@@ -99,6 +112,8 @@ end
       file.close
     end
 
+
+    try_load_students
     interactive_menu
 
 
